@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jammula Surya Teja — Video Editor & Full-Stack Developer</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Loading Experience Overlay -->
+  <div id="loader" class="loader">
+    <div class="loader-content">
+      <div class="loader-logo">SURYA TEJA</div>
+      <div class="loader-spinner"></div>
+      <div class="loader-text">Loading Experience</div>
+      <div class="loader-progress-track">
+        <div id="loader-progress-bar" class="loader-progress-bar"></div>
+      </div>
+      <span id="loader-percent" class="loader-percent">0%</span>
+    </div>
+  </div>
+
+  <!-- Background Scroll Video Frame Animation Layer -->
+  <div class="bg-stage">
+    <canvas id="animation-canvas"></canvas>
+    <div class="stage-vignette"></div>
+  </div>
+
+  <!-- Main Website Content Container -->
+  <div class="page-wrapper">
+    
+    <!-- 1. TOP HEADER / NAVIGATION STRIP -->
+    <header class="top-nav">
+      <div class="nav-left">
+        <span class="role-highlight">VIDEO EDITOR</span>
+        <span class="role-sub">FULL-STACK DEV</span>
+      </div>
+      <div class="nav-right">
+        <span class="availability-badge">AVAILABLE FOR FREELANCE <span class="sparkle">✦</span></span>
+      </div>
+    </header>
+
+    <!-- 2. HERO SECTION -->
+    <section class="hero-section" id="hero">
+
+      <div class="hero-grid">
+        <!-- Left Hero Content -->
+        <div class="hero-col-left">
+          <div class="intro-script">Hello, I'm</div>
+          <h1 class="hero-name">
+            SURYA<br>
+            TEJA
+          </h1>
+          <div class="hero-tagline">
+            VIDEO EDITOR &amp;<br>
+            FULL-STACK DEVELOPER
+          </div>
+          <p class="hero-bio">
+            Three crafts, one timeline. I cut the footage, grow the feed it lives on, and build the site that holds it all together.
+          </p>
+          <div class="location-tag">
+            <svg class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10" stroke-width="1.8"/>
+              <line x1="2" y1="12" x2="22" y2="12" stroke-width="1.8"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke-width="1.8"/>
+            </svg>
+            <span>HYDERABAD, INDIA</span>
+          </div>
+        </div>
+
+        <!-- Center Hero Visual (The Canvas video frames scrub in background behind this area) -->
+        <div class="hero-col-center"></div>
+
+        <!-- Right Hero Stats & Badge -->
+        <div class="hero-col-right">
+
+
+          <div class="hero-stats-stack">
+            <div class="stat-box">
+              <span class="stat-number">150+</span>
+              <span class="stat-desc">REELS<br>EDITED</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-number">48K</span>
+              <span class="stat-desc">FOLLOWERS<br>GROWN</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-number">4+</span>
+              <span class="stat-desc">PROJECTS<br>BUILT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SELECTED PROJECTS SECTION -->
+    <section class="projects-section" id="projects">
+      <div class="section-top-bar">
+        <h2 class="section-heading">SELECTED PROJECTS</h2>
+        <a href="#all-projects" class="view-all-link">
+          VIEW ALL PROJECTS <span class="arrow">⟶</span>
+        </a>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project 1: Harley-Davidson -->
+        <div class="project-card video-card" data-video-src="projects/harley-davidson/0303(1).mp4">
+          <div class="project-thumb">
+            <img src="projects/harley-davidson/harley davidson.png" alt="Harley-Davidson Project" class="project-thumbnail-img">
+            <div class="play-overlay">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="project-info">
+            <span class="project-num">01</span>
+            <div class="project-meta">
+              <h3 class="project-title">HARLEY-DAVIDSON</h3>
+              <p class="project-category">VIDEO EDITING / EVENT CONTENT</p>
+            </div>
+            <span class="project-arrow">⟶</span>
+          </div>
+        </div>
+
+        <!-- Project 2: Personal Video -->
+        <div class="project-card video-card" data-video-src="projects/personal-vedio/copy_71043317-53C6-46AE-AEC7-8575749DFA4B.mov">
+          <div class="project-thumb">
+            <img src="projects/personal-vedio/my vedio.png" alt="Personal Video Project" class="project-thumbnail-img">
+            <div class="play-overlay">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="project-info">
+            <span class="project-num">02</span>
+            <div class="project-meta">
+              <h3 class="project-title">PERSONAL VIDEO</h3>
+              <p class="project-category">VIDEO EDITING / PERSONAL CONTENT</p>
+            </div>
+            <span class="project-arrow">⟶</span>
+          </div>
+        </div>
+
+        <!-- Project 3: Interior Design -->
+        <div class="project-card video-card" data-video-src="projects/interior-design/IMG_2460.MP4">
+          <div class="project-thumb">
+            <img src="projects/interior-design/interior design.png" alt="Interior Design Project" class="project-thumbnail-img">
+            <div class="play-overlay">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="project-info">
+            <span class="project-num">03</span>
+            <div class="project-meta">
+              <h3 class="project-title">INTERIOR DESIGN</h3>
+              <p class="project-category">VIDEO EDITING / INSTAGRAM AD</p>
+            </div>
+            <span class="project-arrow">⟶</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOCIAL MEDIA / INSTAGRAM SECTION -->
+    <section class="projects-section" id="social">
+      <div class="section-top-bar">
+        <h2 class="section-heading">SOCIAL MEDIA / INSTAGRAM</h2>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Account 1: Surya -->
+        <div class="project-card">
+          <div class="project-thumb social-thumb">
+            <img src="projects/instagram/surya/surya.jpeg" alt="Surya Instagram" class="project-thumbnail-img">
+          </div>
+          <div class="project-info">
+            <div class="project-meta">
+              <h3 class="project-title">SURYA</h3>
+              <p class="project-category">PERSONAL ACCOUNT</p>
+            </div>
+            <a href="https://instagram.com/suryateja.24" target="_blank" rel="noreferrer" class="project-arrow">⟶</a>
+          </div>
+        </div>
+
+        <!-- Account 2: Client 01 -->
+        <div class="project-card">
+          <div class="project-thumb social-thumb">
+            <img src="projects/instagram/client-account-1/anuyha.jpeg" alt="Client Account 01" class="project-thumbnail-img">
+          </div>
+          <div class="project-info">
+            <div class="project-meta">
+              <h3 class="project-title">CLIENT ACCOUNT 01</h3>
+              <p class="project-category">MANAGED ACCOUNT</p>
+            </div>
+            <span class="project-arrow">⟶</span>
+          </div>
+        </div>
+
+        <!-- Account 3: Client 02 -->
+        <div class="project-card">
+          <div class="project-thumb social-thumb">
+            <img src="projects/instagram/client-account-2/cb739eaf-1640-4a87-b8b1-f054fc0d2e71.jpg" alt="Client Account 02" class="project-thumbnail-img">
+          </div>
+          <div class="project-info">
+            <div class="project-meta">
+              <h3 class="project-title">CLIENT ACCOUNT 02</h3>
+              <p class="project-category">MANAGED ACCOUNT</p>
+            </div>
+            <span class="project-arrow">⟶</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. EDUCATION & SKILLS + WORK PROCESS + QUOTE SECTION (3 Columns) -->
+    <section class="details-section" id="details">
+      <div class="details-grid">
+        
+        <!-- Column 1: Education & Skills -->
+        <div class="details-col col-education">
+          <h2 class="col-main-heading">EDUCATION &amp; SKILLS</h2>
+          
+          <div class="sub-block">
+            <h3 class="sub-block-title">EDUCATION</h3>
+            <div class="edu-item">
+              <div class="edu-info">
+                <h4 class="edu-degree">B.Tech in Computer Science & Engineering</h4>
+                <p class="edu-school">MLR Institute of Technology (MLRIT)</p>
+              </div>
+              <span class="edu-year">2022 - 2026</span>
+            </div>
+
+            <div class="edu-item">
+              <div class="edu-info">
+                <h4 class="edu-degree">UI/UX Design Certification</h4>
+                <p class="edu-school">Google Career Certificates</p>
+              </div>
+              <span class="edu-year">2025</span>
+            </div>
+          </div>
+
+          <div class="sub-block">
+            <h3 class="sub-block-title">SKILLS</h3>
+            <div class="skills-wrap">
+              <span class="skill-tag">VIDEO EDITING</span>
+              <span class="skill-tag">ADOBE PREMIERE PRO</span>
+              <span class="skill-tag">AFTER EFFECTS</span>
+              <span class="skill-tag">CAPCUT</span>
+              <span class="skill-tag">PHOTOSHOP</span>
+              <span class="skill-tag">PHOTO EDITING</span>
+              <span class="skill-tag">GRAPHIC DESIGN</span>
+              <span class="skill-tag">MOTION GRAPHICS</span>
+              <span class="skill-tag">COLOR GRADING</span>
+              <span class="skill-tag">THUMBNAIL DESIGN</span>
+              <span class="skill-tag">DATA ANALYTICS</span>
+              <span class="skill-tag">EXCEL</span>
+              <span class="skill-tag">SQL</span>
+              <span class="skill-tag">POWER BI</span>
+              <span class="skill-tag">DATA VISUALIZATION</span>
+              <span class="skill-tag">SOCIAL MEDIA MANAGEMENT</span>
+              <span class="skill-tag">REELS CREATION</span>
+              <span class="skill-tag">CONTENT CREATION</span>
+              <span class="skill-tag">SOCIAL MEDIA</span>
+              <span class="skill-tag">CREATIVE WRITING</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2: Work Process Timeline -->
+        <div class="details-col col-process">
+          <h2 class="col-main-heading">WORK PROCESS</h2>
+
+          <div class="process-timeline">
+            <!-- Step 1 -->
+            <div class="process-step">
+              <span class="step-num">01</span>
+              <div class="step-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <circle cx="11" cy="11" r="8" stroke-width="2"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" stroke-width="2"/>
+                </svg>
+              </div>
+              <div class="step-content">
+                <h4 class="step-title">TELL THE DREAM</h4>
+                <p class="step-desc">One or two calls where you just talk — I record, ask questions, find the shape of the story underneath.</p>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="process-step">
+              <span class="step-num">02</span>
+              <div class="step-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-7 7c0 2.5 1.5 4.5 3 6h8c1.5-1.5 3-3.5 3-6a7 7 0 0 0-7-7z" stroke-width="2"/>
+                </svg>
+              </div>
+              <div class="step-content">
+                <h4 class="step-title">OUTLINE</h4>
+                <p class="step-desc">You approve the structure before a single chapter gets written — no surprises later.</p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="process-step">
+              <span class="step-num">03</span>
+              <div class="step-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" stroke-width="2"/>
+                </svg>
+              </div>
+              <div class="step-content">
+                <h4 class="step-title">DRAFT & REVISE</h4>
+                <p class="step-desc">Chapters land in batches. You give notes, I revise — included rounds keep it honest.</p>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="process-step">
+              <span class="step-num">04</span>
+              <div class="step-icon-box">
+                <span class="code-bracket">&lt;/&gt;</span>
+              </div>
+              <div class="step-content">
+                <h4 class="step-title">DELIVER</h4>
+                <p class="step-desc">Final manuscript, formatted and ready — plus guidance to actually publish it if you want that.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 3: Quote & Collaboration Callout (Crimson Card) -->
+        <div class="details-col col-quote-card">
+          <div class="crimson-quote-box">
+            <div class="quote-mark">““</div>
+            <p class="quote-statement">
+              You tell me the dream. I turn it into a real book — the same way I turned mine into one.
+            </p>
+            <div class="quote-signature">Surya</div>
+
+            <div class="quote-footer">
+              <span class="quote-footer-text">LET'S CREATE SOMETHING GREAT TOGETHER.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. CONTACT & FOOTER SECTION ("LET'S WORK TOGETHER") -->
+    <footer class="contact-footer-section" id="contact">
+      <div class="contact-grid">
+        
+        <!-- Left: CTA Heading -->
+        <div class="contact-col-left">
+          <h2 class="contact-title">
+            LET'S WORK<br>
+            TOGETHER
+          </h2>
+          <p class="contact-subtext">
+            I'm currently open for new projects and collaborations. Let's create something amazing that drives results.
+          </p>
+          <a href="mailto:suryateja2424@yahoo.com" class="btn-available">
+            <span class="btn-arrow">⟶</span>
+            <span>AVAILABLE FOR FREELANCE</span>
+          </a>
+        </div>
+
+        <!-- Middle: Contact Info List -->
+        <div class="contact-col-mid">
+          <ul class="contact-info-list">
+            <li class="contact-info-item">
+              <div class="contact-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke-width="1.8"/>
+                  <polyline points="22,6 12,13 2,6" stroke-width="1.8"/>
+                </svg>
+              </div>
+              <a href="mailto:suryateja2424@yahoo.com" class="contact-value">suryateja2424@yahoo.com</a>
+            </li>
+
+            <li class="contact-info-item">
+              <div class="contact-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" stroke-width="1.8"/>
+                  <rect x="2" y="9" width="4" height="12" stroke-width="1.8"/>
+                  <circle cx="4" cy="4" r="2" stroke-width="1.8"/>
+                </svg>
+              </div>
+              <a href="https://instagram.com/suryateja.24" target="_blank" rel="noreferrer" class="contact-value">@suryateja.24</a>
+            </li>
+
+            <li class="contact-info-item">
+              <div class="contact-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke-width="1.8"/>
+                </svg>
+              </div>
+              <a href="tel:+917075082424" class="contact-value">+91 70750 82424</a>
+            </li>
+
+            <li class="contact-info-item">
+              <div class="contact-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke-width="1.8"/>
+                  <circle cx="12" cy="10" r="3" stroke-width="1.8"/>
+                </svg>
+              </div>
+              <span class="contact-value">Hyderabad, India</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right: Modern 3D Workstation Display Mockup -->
+        <div class="contact-col-right">
+          <div class="desk-showcase">
+            <div class="laptop-device">
+              <div class="laptop-screen">
+                <div class="screen-content">
+                  <div class="portfolio-preview-header">
+                    <span class="mock-dot"></span>
+                    <span class="mock-dot"></span>
+                    <span class="mock-dot"></span>
+                  </div>
+                  <div class="screen-hero-preview">
+                    <h4>WE<br>DESIGN<br>DIGITAL<br>EXPERIENCES</h4>
+                    <div class="preview-accent-graphic"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="laptop-base">
+                <div class="laptop-notch"></div>
+              </div>
+            </div>
+
+            <!-- Coffee Mug with 'R' monogram -->
+            <div class="coffee-mug">
+              <span class="mug-logo">S</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Video Modal -->
+  <div id="video-modal" class="video-modal">
+    <div class="video-modal-content">
+      <button id="close-video-modal" class="close-video-modal">✕</button>
+      <video id="modal-video-player" controls controlsList="nodownload"></video>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
