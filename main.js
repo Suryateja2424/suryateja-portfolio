@@ -11,22 +11,18 @@
   const FRAME_PATH = (index) => `frames/frame_${index.toString().padStart(6, '0')}.jpg`;
 
   // --- Video Projects Configuration ---
-  // Replace "YOUR_VIDEO_URL" with your actual hosted video link (e.g. from YouTube, Vimeo, Cloudinary, etc.)
   const videoProjectsConfig = {
     "harley-davidson": {
       title: "HARLEY-DAVIDSON",
-      videoUrl: "YOUR_VIDEO_URL",
-      localFallback: "projects/harley-davidson/0303(1).mp4"
+      videoUrl: "PASTE_HOSTED_VIDEO_URL_HERE"
     },
     "personal-video": {
       title: "PERSONAL VIDEO",
-      videoUrl: "YOUR_VIDEO_URL",
-      localFallback: "projects/personal-vedio/copy_71043317-53C6-46AE-AEC7-8575749DFA4B.mov"
+      videoUrl: "PASTE_HOSTED_VIDEO_URL_HERE"
     },
     "interior-design": {
       title: "INTERIOR DESIGN",
-      videoUrl: "YOUR_VIDEO_URL",
-      localFallback: "projects/interior-design/IMG_2460.MP4"
+      videoUrl: "PASTE_HOSTED_VIDEO_URL_HERE"
     }
   };
 
@@ -218,51 +214,48 @@
         const project = videoProjectsConfig[projectId];
         
         if (project) {
-          // Determine the best video source: external URL first, fallback to local if not configured
-          const hasExternalUrl = project.videoUrl && project.videoUrl !== "YOUR_VIDEO_URL";
-          const videoSrc = hasExternalUrl ? project.videoUrl : project.localFallback;
+          const hasExternalUrl = project.videoUrl && project.videoUrl !== "PASTE_HOSTED_VIDEO_URL_HERE" && project.videoUrl !== "";
           
-          if (videoSrc) {
-            // Reset modal state
-            const existingError = videoModal.querySelector('.video-error-message');
-            if (existingError) existingError.remove();
-            modalVideoPlayer.style.display = 'block';
-            
-            // Set source and display modal
-            modalVideoPlayer.src = videoSrc;
-            videoModal.classList.add('active');
-            
-            // Handle error (e.g. if fallback file is missing locally)
-            modalVideoPlayer.onerror = () => {
-              modalVideoPlayer.style.display = 'none';
-              const errorMsg = document.createElement('div');
-              errorMsg.className = 'video-error-message';
-              errorMsg.style.color = '#fff';
-              errorMsg.style.fontFamily = "'Plus Jakarta Sans', sans-serif";
-              errorMsg.style.textAlign = 'center';
-              errorMsg.style.position = 'absolute';
-              errorMsg.style.top = '50%';
-              errorMsg.style.left = '50%';
-              errorMsg.style.transform = 'translate(-50%, -50%)';
-              errorMsg.style.width = '100%';
-              errorMsg.style.padding = '0 20px';
-              errorMsg.innerHTML = `
-                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px;">VIDEO UNAVAILABLE</h3>
-                <p style="color: #aaa; margin-bottom: 0.5rem;">The video for <strong>${project.title}</strong> could not be loaded.</p>
-                <p style="color: #666; font-size: 0.9rem;">Please update the <code>videoUrl</code> property in main.js with a valid hosted video link.</p>
-              `;
-              document.querySelector('.video-modal-content').appendChild(errorMsg);
-            };
+          // Reset modal state
+          const existingError = videoModal.querySelector('.video-error-message');
+          if (existingError) existingError.remove();
+          modalVideoPlayer.style.display = 'block';
+          videoModal.classList.add('active');
 
-            // Attempt to play
+          const showError = () => {
+            modalVideoPlayer.style.display = 'none';
+            const errorMsg = document.createElement('div');
+            errorMsg.className = 'video-error-message';
+            errorMsg.style.color = '#fff';
+            errorMsg.style.fontFamily = "'Plus Jakarta Sans', sans-serif";
+            errorMsg.style.textAlign = 'center';
+            errorMsg.style.position = 'absolute';
+            errorMsg.style.top = '50%';
+            errorMsg.style.left = '50%';
+            errorMsg.style.transform = 'translate(-50%, -50%)';
+            errorMsg.style.width = '100%';
+            errorMsg.style.padding = '0 20px';
+            errorMsg.innerHTML = `
+              <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px;">VIDEO UNAVAILABLE</h3>
+              <p style="color: #aaa; margin-bottom: 0.5rem;">The video for <strong>${project.title}</strong> could not be loaded.</p>
+              <p style="color: #666; font-size: 0.9rem;">Please update the <code>videoUrl</code> property in main.js with a valid hosted video link.</p>
+            `;
+            document.querySelector('.video-modal-content').appendChild(errorMsg);
+          };
+
+          if (hasExternalUrl) {
+            modalVideoPlayer.src = project.videoUrl;
+            modalVideoPlayer.onerror = showError;
+            
             const playPromise = modalVideoPlayer.play();
             if (playPromise !== undefined) {
               playPromise.catch(e => {
                 console.warn("Video auto-play prevented or failed:", e);
-                // The onerror handler above catches missing files (404), 
-                // this catch is primarily for browser autoplay policies or playback aborts.
               });
             }
+          } else {
+            // URL not provided yet, show error message immediately without trying to load
+            showError();
           }
         }
       });
