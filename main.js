@@ -10,6 +10,26 @@
   const DAMPING = 0.085; // Momentum damping for silky-smooth physics scrubbing
   const FRAME_PATH = (index) => `frames/frame_${index.toString().padStart(6, '0')}.jpg`;
 
+  // --- Video Projects Configuration ---
+  // Replace "YOUR_VIDEO_URL" with your actual hosted video link (e.g. from YouTube, Vimeo, Cloudinary, etc.)
+  const videoProjectsConfig = {
+    "harley-davidson": {
+      title: "HARLEY-DAVIDSON",
+      videoUrl: "YOUR_VIDEO_URL",
+      localFallback: "projects/harley-davidson/0303(1).mp4"
+    },
+    "personal-video": {
+      title: "PERSONAL VIDEO",
+      videoUrl: "YOUR_VIDEO_URL",
+      localFallback: "projects/personal-vedio/copy_71043317-53C6-46AE-AEC7-8575749DFA4B.mov"
+    },
+    "interior-design": {
+      title: "INTERIOR DESIGN",
+      videoUrl: "YOUR_VIDEO_URL",
+      localFallback: "projects/interior-design/IMG_2460.MP4"
+    }
+  };
+
   // --- DOM Elements ---
   const canvas = document.getElementById('animation-canvas');
   const ctx = canvas.getContext('2d', { alpha: false });
@@ -194,11 +214,56 @@
   if (videoModal && modalVideoPlayer && closeVideoModalBtn) {
     videoCards.forEach(card => {
       card.addEventListener('click', () => {
-        const videoSrc = card.getAttribute('data-video-src');
-        if (videoSrc) {
-          modalVideoPlayer.src = videoSrc;
-          videoModal.classList.add('active');
-          modalVideoPlayer.play().catch(e => console.error("Video play failed:", e));
+        const projectId = card.getAttribute('data-project-id');
+        const project = videoProjectsConfig[projectId];
+        
+        if (project) {
+          // Determine the best video source: external URL first, fallback to local if not configured
+          const hasExternalUrl = project.videoUrl && project.videoUrl !== "YOUR_VIDEO_URL";
+          const videoSrc = hasExternalUrl ? project.videoUrl : project.localFallback;
+          
+          if (videoSrc) {
+            // Reset modal state
+            const existingError = videoModal.querySelector('.video-error-message');
+            if (existingError) existingError.remove();
+            modalVideoPlayer.style.display = 'block';
+            
+            // Set source and display modal
+            modalVideoPlayer.src = videoSrc;
+            videoModal.classList.add('active');
+            
+            // Handle error (e.g. if fallback file is missing locally)
+            modalVideoPlayer.onerror = () => {
+              modalVideoPlayer.style.display = 'none';
+              const errorMsg = document.createElement('div');
+              errorMsg.className = 'video-error-message';
+              errorMsg.style.color = '#fff';
+              errorMsg.style.fontFamily = "'Plus Jakarta Sans', sans-serif";
+              errorMsg.style.textAlign = 'center';
+              errorMsg.style.position = 'absolute';
+              errorMsg.style.top = '50%';
+              errorMsg.style.left = '50%';
+              errorMsg.style.transform = 'translate(-50%, -50%)';
+              errorMsg.style.width = '100%';
+              errorMsg.style.padding = '0 20px';
+              errorMsg.innerHTML = `
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px;">VIDEO UNAVAILABLE</h3>
+                <p style="color: #aaa; margin-bottom: 0.5rem;">The video for <strong>${project.title}</strong> could not be loaded.</p>
+                <p style="color: #666; font-size: 0.9rem;">Please update the <code>videoUrl</code> property in main.js with a valid hosted video link.</p>
+              `;
+              document.querySelector('.video-modal-content').appendChild(errorMsg);
+            };
+
+            // Attempt to play
+            const playPromise = modalVideoPlayer.play();
+            if (playPromise !== undefined) {
+              playPromise.catch(e => {
+                console.warn("Video auto-play prevented or failed:", e);
+                // The onerror handler above catches missing files (404), 
+                // this catch is primarily for browser autoplay policies or playback aborts.
+              });
+            }
+          }
         }
       });
     });
@@ -207,6 +272,9 @@
       videoModal.classList.remove('active');
       modalVideoPlayer.pause();
       modalVideoPlayer.src = ''; // reset to stop buffering
+      
+      const existingError = videoModal.querySelector('.video-error-message');
+      if (existingError) existingError.remove();
     };
 
     closeVideoModalBtn.addEventListener('click', closeModal);
