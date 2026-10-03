@@ -14,15 +14,15 @@
   const videoProjectsConfig = {
     "harley-davidson": {
       title: "HARLEY-DAVIDSON",
-      videoUrl: "PASTE_HOSTED_VIDEO_URL_HERE"
+      videoUrl: "https://player.mediadelivery.net/play/769497/f86f514d-6b4d-4938-b359-7209f3376da4?autoplay=true"
     },
     "personal-video": {
       title: "PERSONAL VIDEO",
-      videoUrl: "PASTE_HOSTED_VIDEO_URL_HERE"
+      videoUrl: "https://player.mediadelivery.net/play/769497/41cccb9a-262a-44fb-9538-be5f46bbd26c?autoplay=true"
     },
     "interior-design": {
       title: "INTERIOR DESIGN",
-      videoUrl: "PASTE_HOSTED_VIDEO_URL_HERE"
+      videoUrl: "https://player.mediadelivery.net/play/769497/ff570a25-523f-4860-9aef-72b210d0a9f8?autoplay=true"
     }
   };
 
@@ -245,14 +245,6 @@
 
           if (hasExternalUrl) {
             modalVideoPlayer.src = project.videoUrl;
-            modalVideoPlayer.onerror = showError;
-            
-            const playPromise = modalVideoPlayer.play();
-            if (playPromise !== undefined) {
-              playPromise.catch(e => {
-                console.warn("Video auto-play prevented or failed:", e);
-              });
-            }
           } else {
             // URL not provided yet, show error message immediately without trying to load
             showError();
@@ -263,7 +255,6 @@
 
     const closeModal = () => {
       videoModal.classList.remove('active');
-      modalVideoPlayer.pause();
       modalVideoPlayer.src = ''; // reset to stop buffering
       
       const existingError = videoModal.querySelector('.video-error-message');
